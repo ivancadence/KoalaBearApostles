@@ -30,3 +30,13 @@ default output of pdf printed this way is $HOME/mozilla.pdf.
 
 The script will attempt to mv output into a more meaningful name-scheme and store it in $HOME/zendesk/kba
 
+**make_bookmark**
+This script is used to generate the bookmark for single-merged pdf.
+to use call script on the same folder as the output pdfs.
+This script will count the pages of each individual pdf and use that information to guesstimate the correct page number it would belong in when merged into one pdf.
+
+usage:
+
+```
+$ make_bookmar
+```
