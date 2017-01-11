@@ -1,0 +1,24 @@
+#!/bin/bash
+
+total=1
+
+echo "{" >> ../test
+
+for file in *; do
+	echo "$file"
+	count="$(pdftk $file dump_data | grep NumberOfPages | sed 's/NumberOfPages: //')"
+	
+	name="${file#*-}"
+	name="${name%.pdf}"
+
+
+	echo "$name , $total" >> ../test
+
+	total="$(( total + count ))"
+
+
+done
+
+echo "}" >> ../test
+
+echo "count is: $total"

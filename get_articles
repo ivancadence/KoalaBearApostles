@@ -1,0 +1,19 @@
+#!/bin/bash
+
+#usage: get_articles <url_of_section_html>
+
+# curl > pull down HTML doc
+# grep.1 > locate lines which contain article links
+# grep.2 > extract href url
+# sed > attach domain
+# wget > pull down each article html+css+images
+
+if [ -z $1 ]
+then
+	echo "no arg"
+	exit 1
+fi
+
+curl -s $1 | grep '\/articles\/' | grep -oP '(?<=href=")[^"]*' | sed 's/^/https:\/\/employmenthero.zendesk.com/' > pages
+
+wget -p -k -i pages

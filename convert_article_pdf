@@ -1,0 +1,28 @@
+#!/bin/bash
+
+#usage: cd into dir with article documents. run convert_article_pdf in that dir.
+
+mkdir -p $HOME/zendesk/kba
+
+for file in *; do
+	echo "Cleaning file -> $file"  
+	sed -i -e 's/\bclass=\"search-box\"/& style=\"display: none\"/' $file
+	sed -i -e 's/\bclass=\"user-nav\"/& style=\"display: none\"/' $file
+	sed -i -e 's/\bclass=\"sub-nav clearfix\"/& style=\"display: none\"/' $file
+	sed -i -e 's/\bclass=\"col-md-offset-1 col-md-4\"/& style=\"display: none\"/' $file
+	sed -i -e 's/\bclass=\"article-footer clearfix\"/& style=\"display: none\"/' $file
+	sed -i -e 's/\bclass=\"article-more-questions\"/& style=\"display: none\"/' $file
+	sed -i -e 's/\bclass=\"article-comments\"/& style=\"display: none\"/' $file
+	sed -i -e 's/\bclass=\"powered-by-zendesk\"/& style=\"display: none\"/' $file
+	sed -i -e 's/\bclass=\"eh-back showing\"/& style=\"display: none\"/' $file
+	sed -i -e 's/href="https:\/\/employmenthero.zendesk.com\/hc\/[^"]*"//' $file
+	
+	echo "firefox -print $file"
+	firefox -print $file
+
+	sleep 6
+	echo "mv $HOME/mozilla.pdf $HOME/zendesk/kba/$file.pdf"
+	mv $HOME/mozilla.pdf $HOME/zendesk/kba/"$file".pdf
+	sleep .5
+
+done
